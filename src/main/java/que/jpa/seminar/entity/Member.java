@@ -1,11 +1,18 @@
 package que.jpa.seminar.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.ConstraintMode;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Version;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,7 +43,16 @@ public class Member {
   private String username;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "TEAM_ID")
+  @JoinColumn(name = "TEAM_ID", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
   private Team team;
+
+  @Embedded
+  private Address address;
+
+  @Enumerated(EnumType.STRING)
+  private Role role;
+
+  @Version
+  private Integer version;
 
 }

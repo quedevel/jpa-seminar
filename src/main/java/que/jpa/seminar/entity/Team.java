@@ -1,6 +1,7 @@
 package que.jpa.seminar.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
@@ -31,5 +32,8 @@ public class Team {
   @Column(name = "TEAM_ID")
   private Long id;
   private String name;
+
+  @Embedded
+  private Address address;
 
 }
